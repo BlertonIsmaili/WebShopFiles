@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<link rel="stylesheet" href="css/bootstrap.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Team Member - Adminsite</title>
+    <script src="js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/underscore.js"></script>
+
+  </head>
+  <script>
+  $(document).ready(function() {
+
+
+    var team = [{name: 'Blerton Ismaili', ProfileImage: 'blerton.png', role:'director'},
+                {name: 'Dario Burch', ProfileImage: 'dario.png', role:'director'},
+                {name: 'Timon Schneider', ProfileImage: 'timon.png', role:'director'},
+                {name: 'Gregory Huber', ProfileImage: 'gregy.png', role:'director'},];
+
+    var teammembers = $("#teammembers").html();
+    var teamtpl =_.template(teammembers);
+
+    var showTeam ='';
+
+      _.each(team, function (teams, index, team){
+        showTeam += teamtpl({
+          team:teams
+        });
+       });
+
+    var TeamContainer = document.getElementById('teamlist');
+    TeamContainer.innerHTML = showTeam;
+
+    $("#addTeam").on("click", function() {
+      var newname = $("#inputName").val();
+      var newrole = $("#roleSelect").val();
+
+
+      var new_member_template = $("#new_member_template").html();
+
+      var compiled_template = _.template(new_member_template);
+
+      $("#teamlist").append(compiled_template({name: newname, role: newrole}));
+return false;
+    });
+   });
+
+
+   </script>
+   <script type="text/template" id="new_member_template">
+     <article class="col-md-3">
+     <div class="thumb">
+     <img src="images/blerton.png"/>
+     </div>
+     <div class="details">
+     <h3 class="h4"><%= name %></h3>
+     <p class="role"><%= role %></p>
+     </div>
+     </article>
+   </script>
+
+   <script type="text/template" id="teammembers">
+     <article class="col-md-3">
+     <div class="thumb">
+     <img src="images/<%=team.ProfileImage%>"/>
+     </div>
+     <div class="details">
+     <h3 class="h4"><%=team.name%></h3>
+     <p class="role"><%=team.role%></p>
+     </div>
+     </article>
+   </script>
+
+
+  <body>
+    <div class="card bg-dark text-white">
+  <img class="card-img" src="images/headeradmin.jpg" alt="Card image">
+  <div class="card-img-overlay">
+
+  </div>
+</div>
+    <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="adminsite.html">Bicycles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Team</a>
+        </li>
+        <li class="nav-item" id="nav">
+          <a class="nav-link" href="index.html">Logout</a>
+        </li>
+
+      </ul>
+    </div>
+    <section id="team">
+        <h2>Team</h2>
+        <div id="team_list">
+
+
+    <div class="row" id="teamlist"></div>
+    <hr>
+        </div>
+        <h3 class="text-center">Add new Member</h3>
+        <form style="margin-left:450px; margin-right:450px;">
+          <div class="form-group">
+            <label for="exampleSelect1">Name</label>
+            <input class="form-control" id="inputName"></input>
+          </div>
+          <div class="form-group">
+            <label for="exampleSelect1">Role</label>
+            <select class="form-control" id="roleSelect">
+              <option>Director</option>
+              <option>Manager</option>
+              <option>Employee</option>
+            </select>
+          </div>
+
+
+    <div class="submitbutton" style="float:right;" >
+      <button type="submit" id="addTeam" class="btn btn-primary">Add</button>
+    </div>
+    </section>
+
+  </body>
+</html>

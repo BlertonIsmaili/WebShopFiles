@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<link rel="stylesheet" href="css/bootstrap.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <script src="js/jquery.js"></script>
+    <script language="javascript" type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/underscore.js"></script>
+  </head>
+  <script>
+  $(document).ready(function() {
+    $("#send").on("click", function() {
+      var name = $("#inputName").val();
+      var mail = $("#inputMail").val();
+      var message = $("#message").val();
+
+
+      var template = $("#template").html();
+
+      var compiled_template = _.template(template);
+
+      $("#Text").append(compiled_template({name: name, mail: mail, message: message}));
+      return false;
+
+    });
+   });
+
+
+   </script>
+
+ </script>
+ <script type="text/template" id="template">
+   <div class="col" style="text-align:center;">
+   <h4 class="h4">Hallo <%= name %>,</h4>
+   <p>Vielen Dank für deine Nachricht. Wir werden uns so schnell wie möglich bei dir per Mail an <%= mail %> melden.
+   <br>
+   <p>Deine Nachricht:</p>
+   <p><%=message%></p>
+   </div>
+ </script>
+  <body>
+    <div class="card bg-dark text-white">
+  <img class="card-img" src="images/header.jpg" alt="Card image">
+  <div class="card-img-overlay">
+
+  </div>
+</div>
+    <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <a class="nav-link " href="index.html">Home</a>
+        </li>
+        <li class="nav-item" id="nav">
+          <a class="nav-link " href="aboutus.html">About Us</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="team.html">Team</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="shop.html">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="contact.html">Contact</a>
+        </li>
+      </ul>
+    </div>
+      </div>
+          <h3 class="text-center">Contact</h3>
+          <div id="Text"></div>
+          <form style="margin-left:400px; margin-right:400px;">
+            <div class="form-group">
+              <label>Name</label>
+              <input class="form-control" id="inputName" placeholder="Username"></input>
+            </div>
+            <div class="form-group">
+      <label>Email address</label>
+      <input class="form-control" id="inputMail"  placeholder="Enter email">
+      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+
+            <div class="form-group">
+              <label for="exampleTextarea">Your Message</label>
+              <textarea class="form-control" id="message" rows="4" placeholder="Please enter your message here.."></textarea>
+            </div>
+
+            <button style="float:right;" type="submit" class="btn btn-primary" id="send">Submit</button>
+
+          </form>
+  </body>
+</html>

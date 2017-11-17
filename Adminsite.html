@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="de">
+<link rel="stylesheet" href="css/bootstrap.css">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script language="javascript" type="text/javascript" src="js/bootstrap.js"></script>
+    <script src="js/underscore-min.js"></script>
+  </head>
+  <script>
+  $(document).ready(function() {
+    var ourVelos = [{id: '1',name: 'Super Velo 1', imageName: 'velo.jpg', price: '999 CHF', link: 'velo1'},
+                    {id: '2',name: 'Super Velo 2', imageName: 'velo.jpg', price: '899 CHF', link: 'velo2'},
+                    {id: '3',name: 'Super Baby Velo', imageName: 'velo.jpg', price: '399 CHF', link: 'velo3'}];
+
+
+                    var velos = $("#bicycletemplate").html();
+                    var veloTemplate =_.template(velos);
+
+
+    var createVelos ='';
+
+      _.each(ourVelos, function (ourVelo, index, ourVelos){
+        createVelos += veloTemplate({
+          ourVelos:ourVelo
+        });
+       });
+
+    var veloContainer = document.getElementById('velorow');
+    veloContainer.innerHTML = createVelos;
+    var veloContainer = document.getElementById('velorow2');
+    veloContainer.innerHTML = createVelos;
+
+    var DelButtonId = '<%=ourVelos.link%>';
+    var VelId = '<%=ourVelos.id%>';
+
+
+    $('#'+DelButtonId+'').live('click', function(){
+      $('#'+VelId+'').remove();
+    });
+
+
+   });
+
+
+  </script>
+  <script type="text/template" id="bicycletemplate">
+    <div class="col" id="<%=ourVelos.id%>">
+     <a class="nav-link active" href="<%= ourVelos.link%>.html">
+      <img class="card-img-top" src="images/<%= ourVelos.imageName%>" alt="Image of Bicycle">
+      <p><%=ourVelos.name%></p>'+'<p><%= ourVelos.price%></p>
+      </a></div>
+      <input type="image" id="<%=ourVelos.link%>" class="delbutton" src="images/delete.png" alt="addbutton" height="25px">
+  </script>
+  <body>
+
+  <div class="card bg-dark text-white">
+  <img class="card-img" src="images/headeradmin.jpg" alt="Card image">
+  <div class="card-img-overlay"></div>
+  </div>
+    <div class="card text-center">
+    <div class="card-header">
+      <ul class="nav nav-pills card-header-pills">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Bicycles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="addteammemberadmin.html">Team</a>
+        </li>
+        <li class="nav-item" id="nav">
+          <a class="nav-link" href="index.html">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+    <h3 class="text-center">Produktverwaltung</h3>
+    <a class="nav-link" href="addnewbike.html">
+    <div style="float:right; margin-right:50px;">
+     <input type="image" src="images/add.svg" alt="addbutton" height="35px">
+     </a>
+  </div>
+  <br>
+    <div class="container">
+    <div class="row" id="velorow"> </div>
+    <div class="row" id="velorow2"> </div>
+
+  </div>
+    <br>
+      <br>
+  <div class="card-footer text-muted">
+      Last change 2 days ago - by Admin Blerton
+  </div>
+
+  </div> </body> </html>
